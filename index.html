@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AuraLit Sky – Minecraft Resource Packs</title>
+<style>
+  :root { --bg:#0b0f1a; --card:#141b2d; --accent:#7ad7ff; --accent2:#b77bff; --text:#e8eefc; --muted:#8b97b5; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: radial-gradient(ellipse at top, #1a2440 0%, var(--bg) 60%); color:var(--text); min-height:100vh; }
+  header { text-align:center; padding:64px 20px 32px; }
+  header h1 { font-size:clamp(2rem,5vw,3.2rem); background:linear-gradient(90deg,var(--accent),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  header p { color:var(--muted); margin-top:10px; }
+  main { max-width:1100px; margin:0 auto; padding:0 20px 80px; }
+  h2 { font-size:1.4rem; margin:40px 0 18px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:22px; }
+  .card { background:var(--card); border:1px solid #22304f; border-radius:16px; overflow:hidden; display:flex; flex-direction:column; transition:transform .2s, box-shadow .2s; }
+  .card:hover { transform:translateY(-4px); box-shadow:0 12px 30px rgba(122,215,255,.12); }
+  .card img { width:100%; aspect-ratio:1/1; image-rendering:pixelated; object-fit:cover; background:#0e1424; }
+  .card .body { padding:18px; display:flex; flex-direction:column; gap:10px; flex:1; }
+  .card h3 { font-size:1.15rem; }
+  .card p { color:var(--muted); font-size:.92rem; line-height:1.45; flex:1; }
+  .meta { font-size:.78rem; color:var(--muted); }
+  .btn { display:inline-block; text-align:center; text-decoration:none; background:linear-gradient(90deg,var(--accent),var(--accent2)); color:#0b0f1a; font-weight:700; padding:11px 16px; border-radius:10px; }
+  .btn:hover { filter:brightness(1.1); }
+  .btn.disabled { background:#22304f; color:var(--muted); pointer-events:none; }
+  .soon { border-style:dashed; opacity:.85; }
+  .soon .icon { width:100%; aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; font-size:4rem; background:#0e1424; color:#2a3857; }
+  footer { text-align:center; color:var(--muted); font-size:.85rem; padding:30px; border-top:1px solid #1c2640; }
+</style>
+</head>
+<body>
+<header>
+  <h1>AuraLit Sky</h1>
+  <p>Custom sky resource packs for Minecraft</p>
+</header>
+
+<main>
+  <h2>Packs</h2>
+  <div class="grid" id="packs"></div>
+
+  <h2>Coming soon</h2>
+  <div class="grid">
+    <article class="card soon">
+      <div class="icon">?</div>
+      <div class="body">
+        <h3>AuraLit Sky's X</h3>
+        <p>Next project in the AuraLit series. Details coming soon.</p>
+        <span class="btn disabled">Coming soon</span>
+      </div>
+    </article>
+  </div>
+</main>
+
+<footer>© AuraLit Sky</footer>
+
+<script>
+  // Add new packs here. file = path to the zip in /downloads, icon = path to the pack image in /img.
+  const packs = [
+    {
+      name: "AuraLit Sky",
+      description: "Custom day and night sky with a lit-up aura look, sun and moon phases. Works with OptiFine custom sky and core shaders.",
+      version: "pack_format 75",
+      icon: "img/aura-lit-sky.png",
+      file: "downloads/AuraLit_Sky.zip"
+    }
+  ];
+
+  const grid = document.getElementById("packs");
+  packs.forEach(p => {
+    const card = document.createElement("article");
+    card.className = "card";
+    card.innerHTML = `
+      <img src="${p.icon}" alt="${p.name} icon">
+      <div class="body">
+        <h3></h3>
+        <p></p>
+        <div class="meta"></div>
+        <a class="btn" href="${p.file}" download>Download</a>
+      </div>`;
+    card.querySelector("h3").textContent = p.name;
+    card.querySelector("p").textContent = p.description;
+    card.querySelector(".meta").textContent = p.version;
+    grid.appendChild(card);
+  });
+</script>
+</body>
+</html>
